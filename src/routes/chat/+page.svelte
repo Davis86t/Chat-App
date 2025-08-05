@@ -3,6 +3,7 @@
   import { pb, currentUser, logout } from '$lib/pocketbase';
   import { get } from 'svelte/store';
   import { goto } from '$app/navigation';
+  import { tick } from 'svelte';
 
   let messages: any[] = [];
   let newMessage = '';
@@ -22,6 +23,7 @@
         expand: 'sender'
       });
       messages = res.items;
+      await tick(); // Wait for rendering
       scrollToBottom();
 
       unsubscribe = await pb.collection('messages').subscribe('*', async ({ action, record }) => {
@@ -29,6 +31,7 @@
           const sender = await pb.collection('users').getOne(record.sender);
           record.expand = { sender };
           messages = [...messages, record];
+          await tick(); // Wait for DOM to update
           scrollToBottom();
         }
       });
