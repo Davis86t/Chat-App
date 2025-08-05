@@ -12,9 +12,21 @@
 		};
 
 		setVH();
+
+		const handleFocusOut = () => {
+			// Small delay to allow keyboard animations to settle
+			setTimeout(setVH, 100);
+		};
+
 		window.addEventListener('resize', setVH);
-		return () => window.removeEventListener('resize', setVH);
+		window.addEventListener('focusout', handleFocusOut);
+
+		return () => {
+			window.removeEventListener('resize', setVH);
+			window.removeEventListener('focusout', handleFocusOut);
+		};
 	});
+
 
 
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
