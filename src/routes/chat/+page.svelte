@@ -47,7 +47,8 @@
         sender: get(currentUser).id
       });
       newMessage = '';
-      scrollToBottom
+      await tick(); // Wait for DOM to update
+      scrollToBottom()
     } catch (err) {
       error = err.message || 'Failed to send message';
     }
@@ -119,16 +120,14 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    height: 100vh;
   }
   .messages {
     flex: 1;
     border: 1px solid #ccc;
     padding: 1rem;
-    height: 60vh;
-    overflow-y: auto;
     background: #fafafa;
-    display: flex;
-    flex-direction: column;
+    overflow-y: auto;
   }
   .msg {
     padding: 0.5rem 1rem;

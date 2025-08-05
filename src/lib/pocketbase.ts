@@ -1,7 +1,11 @@
 import PocketBase from 'pocketbase';
 import { writable } from 'svelte/store';
 
-export const pb = new PocketBase('https://chat-app-backend-r1km.onrender.com');
+export const pb = new PocketBase(import.meta.env.DEV
+  ? 'http://localhost:8090'
+  : 'https://chat-app-backend-r1km.onrender.com'
+);
+
 export const currentUser = writable(pb.authStore.model);
 
 // Sync store and log auth changes
