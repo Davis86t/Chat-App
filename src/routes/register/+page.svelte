@@ -8,18 +8,23 @@
   let error = '';
 
   async function handleRegister() {
-    try {
-      await pb.collection('users').create({
-        email,
-        password,
-        passwordConfirm: password,
-        username,
-      });
-      goto('/login');
-    } catch (err) {
-      error = err.message || 'Registration failed';
-    }
+  try {
+    await pb.collection('users').create({
+      email,
+      password,
+      passwordConfirm: password,
+      username,
+      emailVisibility: true
+    });
+
+    // Auto login after registration
+    await pb.collection('users').authWithPassword(email, password);
+    goto('/chat');
+  } catch (err) {
+    error = err.message || 'Registration failed';
   }
+}
+
 </script>
 
 <form on:submit|preventDefault={handleRegister}>
