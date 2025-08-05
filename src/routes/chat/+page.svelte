@@ -62,7 +62,10 @@
       <div class="msg">
         <small>{m.expand?.sender?.username || m.expand?.sender?.email || m.sender}
           &middot; 
-          {new Date(m.created).toLocaleString()}
+          {new Date(m.created).toLocaleString([], {
+            hour: 'numeric',
+            minute: '2-digit'
+          })}
         </small>
         <p>{m.text}</p>
       </div>
