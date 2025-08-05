@@ -11,9 +11,6 @@
   let error = '';
   let messagesContainer: HTMLDivElement | null = null;
 
-  function scrollToBottom() {
-    messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
-  }
 
 
   onMount(async () => {
@@ -23,7 +20,6 @@
         expand: 'sender'
       });
       messages = res.items;
-      await tick(); // Wait for rendering
       scrollToBottom();
 
       unsubscribe = await pb.collection('messages').subscribe('*', async ({ action, record }) => {
@@ -51,9 +47,16 @@
         sender: get(currentUser).id
       });
       newMessage = '';
+      scrollToBottom
     } catch (err) {
       error = err.message || 'Failed to send message';
     }
+  }
+
+  function scrollToBottom() {
+    setTimeout(() => {
+      messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
+    }, 0);
   }
 
   function handleLogout() {
