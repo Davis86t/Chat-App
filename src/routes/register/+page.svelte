@@ -1,15 +1,21 @@
 <script lang="ts">
-  import { register } from '$lib/pocketbase';
+  import { pb } from '$lib/pocketbase';
   import { goto } from '$app/navigation';
 
   let email = '';
   let password = '';
+  let username = '';
   let error = '';
 
   async function handleRegister() {
     try {
-      await register(email, password);
-      goto('/chat');
+      await pb.collection('users').create({
+        email,
+        password,
+        passwordConfirm: password,
+        username,
+      });
+      goto('/login');
     } catch (err) {
       error = err.message || 'Registration failed';
     }
@@ -19,6 +25,7 @@
 <form on:submit|preventDefault={handleRegister}>
   <h2>Register</h2>
   {#if error}<p class="error">{error}</p>{/if}
+  <input type="text" bind:value={username} placeholder="Username" required />
   <input type="email" bind:value={email} placeholder="Email" required />
   <input type="password" bind:value={password} placeholder="Password" required />
   <button type="submit">Register</button>

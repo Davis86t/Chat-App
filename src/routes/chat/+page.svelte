@@ -60,7 +60,7 @@
   <div class="messages">
     {#each messages as m (m.id)}
       <div class="msg">
-        <small>{m.expand?.sender?.username ?? m.sender}</small>
+        <small>{m.expand?.sender?.username || m.expand?.sender?.email || m.sender}</small>
         <p>{m.text}</p>
       </div>
     {/each}
