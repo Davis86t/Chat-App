@@ -2,7 +2,8 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import { dev } from '$app/environment';
 	import { injectAnalytics } from '@vercel/analytics/sveltekit';
- 
+	import '../app.css';
+	
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
 
 	let { children } = $props();

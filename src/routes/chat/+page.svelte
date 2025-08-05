@@ -105,7 +105,8 @@
     .chat {
       margin: 0;
       padding: 0.5rem;
-      height: 100dvh;
+      min-height: 100dvh;
+      min-height: 100vh;
     }
 
     .messages {
@@ -130,14 +131,16 @@
 
 
   .chat {
-    max-width: 700px;
-    margin: 2rem auto;
-    padding: 0 1rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 1rem;
     height: 100dvh;
+    height: 100vh;
+    box-sizing: border-box;
   }
+
   .messages {
     flex: 1;
     border: 1px solid #ccc;
@@ -174,21 +177,19 @@
   }
   header {
     padding: 1rem 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex: 0 0 auto;
   }
   footer {
-  display: flex;
-  justify-content: center;
   padding: 1rem 0;
-  text-align: center;
+  justify-content: center;
+  display: flex;
   }
 
   form {
     display: flex;
     gap: 0.5rem;
     padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
   input {
     flex: 1;
