@@ -8,6 +8,12 @@
   let newMessage = '';
   let unsubscribe: () => void;
   let error = '';
+  let messagesContainer: HTMLDivElement | null = null;
+
+  function scrollToBottom() {
+    messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
+  }
+
 
   onMount(async () => {
     try {
@@ -16,12 +22,14 @@
         expand: 'sender'
       });
       messages = res.items;
+      scrollToBottom();
 
       unsubscribe = await pb.collection('messages').subscribe('*', async ({ action, record }) => {
         if (action === 'create') {
           const sender = await pb.collection('users').getOne(record.sender);
           record.expand = { sender };
           messages = [...messages, record];
+          scrollToBottom();
         }
       });
     } catch (err) {
@@ -56,7 +64,7 @@
   <header>
     <h2>Chat</h2>
   </header>
-  <div class="messages">
+  <div class="messages" bind:this={messagesContainer}>
     {#each messages as m (m.id)}
       <div class="msg {m.sender === get(currentUser).id ? 'self' : 'other'}">
         <div class="meta">
