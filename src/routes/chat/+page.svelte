@@ -105,7 +105,8 @@
     .chat {
       margin: 0;
       padding-inline: 0.5rem;
-      height: 100dvh;
+      height: calc(var(--vh, 1vh) * 100);
+      max-height: calc(var(--vh, 1vh) * 100);
     }
 
     .messages {

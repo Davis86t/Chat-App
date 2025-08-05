@@ -20,6 +20,10 @@
 
 		window.addEventListener('resize', setVH);
 		window.addEventListener('focusout', handleFocusOut);
+		window.addEventListener('orientationchange', () => {
+			setTimeout(setVH, 500); // slight delay helps ensure correct value
+		});
+
 
 		return () => {
 			window.removeEventListener('resize', setVH);
