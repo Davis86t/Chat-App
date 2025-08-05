@@ -62,13 +62,14 @@
         <div class="meta">
           <small>{m.expand?.sender?.username || m.expand?.sender?.email || m.sender}
             &middot; 
-            {new Date(m.created).toLocaleString('en-US', {
+            <div class="timestamp">{new Date(m.created).toLocaleString('en-US', {
               year: '2-digit',
               month: '2-digit',
               day: '2-digit',
               hour: 'numeric',
               minute: '2-digit'
             })}
+            </div>
           </small>
         </div>
         <p>{m.text}</p>
