@@ -17,7 +17,7 @@
       });
       messages = res.items;
 
-      unsubscribe = await pb.collection('messages').subscribe('', async ({ action, record }) => {
+      unsubscribe = await pb.collection('messages').subscribe('*', async ({ action, record }) => {
         if (action === 'create') {
           const sender = await pb.collection('users').getOne(record.sender);
           record.expand = { sender };
