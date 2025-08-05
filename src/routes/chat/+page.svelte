@@ -55,7 +55,6 @@
 <div class="chat">
   <header>
     <h2>Chat</h2>
-    <button on:click={handleLogout}>Logout</button>
   </header>
   <div class="messages">
     {#each messages as m (m.id)}
@@ -80,9 +79,24 @@
     <input bind:value={newMessage} placeholder="Type a message..." />
     <button type="submit">Send</button>
   </form>
+  <footer>
+    <button on:click={handleLogout}>Logout</button>
+  </footer>
 </div>
 
 <style>
+  @media (max-width: 600px) {
+    .chat {
+      margin: 1rem;
+      padding: 1rem;
+    }
+
+    input,
+    button {
+      font-size: 1rem;
+    }
+  }
+
   .chat {
     max-width: 700px;
     margin: 2rem auto;
@@ -132,6 +146,12 @@
     justify-content: space-between;
     align-items: center;
   }
+  footer {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+  }
+
   form {
     display: flex;
     gap: 0.5rem;
