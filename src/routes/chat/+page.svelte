@@ -103,15 +103,31 @@
 <style>
   @media (max-width: 600px) {
     .chat {
-      margin: 1rem;
-      padding: 1rem;
+      margin: 0;
+      padding: 0.5rem;
+      height: 100dvh;
+    }
+
+    .messages {
+      padding: 0.5rem;
     }
 
     input,
     button {
       font-size: 1rem;
+      padding: 0.5rem;
+    }
+
+    form {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    footer {
+      padding: 0.5rem 0;
     }
   }
+
 
   .chat {
     max-width: 700px;
@@ -120,7 +136,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    height: 100vh;
+    height: 100dvh;
   }
   .messages {
     flex: 1;
@@ -128,6 +144,7 @@
     padding: 1rem;
     background: #fafafa;
     overflow-y: auto;
+    min-height: 0;
   }
   .msg {
     padding: 0.5rem 1rem;
@@ -156,6 +173,7 @@
   font-style: italic;
   }
   header {
+    padding: 1rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -164,11 +182,13 @@
   display: flex;
   justify-content: center;
   padding: 1rem 0;
+  text-align: center;
   }
 
   form {
     display: flex;
     gap: 0.5rem;
+    padding-top: 0.5rem;
   }
   input {
     flex: 1;
