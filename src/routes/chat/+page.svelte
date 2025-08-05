@@ -59,17 +59,19 @@
   </header>
   <div class="messages">
     {#each messages as m (m.id)}
-      <div class="msg">
-        <small>{m.expand?.sender?.username || m.expand?.sender?.email || m.sender}
-          &middot; 
-          {new Date(m.created).toLocaleString('en-US', {
-            year: '2-digit',
-            month: '2-digit',
-            day: '2-digit',
-            hour: 'numeric',
-            minute: '2-digit'
-          })}
-        </small>
+      <div class="msg {m.sender === get(currentUser).id ? 'self' : 'other'}">
+        <div class="meta">
+          <small>{m.expand?.sender?.username || m.expand?.sender?.email || m.sender}
+            &middot; 
+            {new Date(m.created).toLocaleString('en-US', {
+              year: '2-digit',
+              month: '2-digit',
+              day: '2-digit',
+              hour: 'numeric',
+              minute: '2-digit'
+            })}
+          </small>
+        </div>
         <p>{m.text}</p>
       </div>
     {/each}
@@ -84,6 +86,7 @@
   .chat {
     max-width: 700px;
     margin: 2rem auto;
+    padding: 0 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -92,12 +95,38 @@
     flex: 1;
     border: 1px solid #ccc;
     padding: 1rem;
-    height: 300px;
+    height: 60vh;
     overflow-y: auto;
     background: #fafafa;
+    display: flex;
+    flex-direction: column;
   }
-  .msg { margin-bottom: 1rem; }
+  .msg {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    max-width: 70%;
+  }
   .msg small { color: #555; display: block; margin-bottom: 0.2rem; }
+  .self {
+  background-color: #daf1da;
+  align-self: flex-end;
+  text-align: right;
+  }
+  .other {
+  background-color: #f0f0f0;
+  align-self: flex-start;
+  }
+  .meta {
+  font-size: 0.75rem;
+  color: #555;
+  margin-bottom: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  }
+  .timestamp {
+  font-style: italic;
+  }
   header {
     display: flex;
     justify-content: space-between;
