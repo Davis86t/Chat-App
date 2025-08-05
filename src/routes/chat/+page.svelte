@@ -105,8 +105,8 @@
     .chat {
       margin: 0;
       padding: 0.5rem;
-      min-height: 100dvh;
-      min-height: 100vh;
+      height: 100vh;
+      height: 100dvh;
     }
 
     .messages {
@@ -136,8 +136,8 @@
     max-width: 700px;
     margin: 0 auto;
     padding: 0 1rem;
-    height: 100dvh;
     height: 100vh;
+    height: 100dvh;
     box-sizing: border-box;
   }
 
