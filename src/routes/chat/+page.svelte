@@ -104,13 +104,14 @@
   @media (max-width: 600px) {
     .chat {
       margin: 0;
-      padding: 0.5rem;
-      height: 100vh;
+      padding-inline: 0.5rem;
       height: 100dvh;
     }
 
     .messages {
       padding: 0.5rem;
+      flex:1;
+      overflow-y: auto;
     }
 
     input,
@@ -136,12 +137,14 @@
     max-width: 700px;
     margin: 0 auto;
     padding: 0 1rem;
-    height: 100vh;
-    height: 100dvh;
+    height: calc(var(--vh, 1vh) * 100);
+    max-height: calc(var(--vh, 1vh) * 100);
     box-sizing: border-box;
   }
 
   .messages {
+    display: flex;
+    flex-direction: column;
     flex: 1;
     border: 1px solid #ccc;
     padding: 1rem;
@@ -150,12 +153,18 @@
     min-height: 0;
   }
   .msg {
+    display:flex;
+    flex-direction: column;
     padding: 0.5rem 1rem;
     border-radius: 10px;
     margin-bottom: 1rem;
     max-width: 70%;
   }
-  .msg small { color: #555; display: block; margin-bottom: 0.2rem; }
+  .msg small { 
+    color: #555;
+    display: block;
+    margin-bottom: 0.2rem; 
+  }
   .self {
   background-color: #daf1da;
   align-self: flex-end;
@@ -164,6 +173,7 @@
   .other {
   background-color: #f0f0f0;
   align-self: flex-start;
+  text-align: left;
   }
   .meta {
   font-size: 0.75rem;
@@ -186,10 +196,14 @@
   }
 
   form {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    z-index: 1;
     display: flex;
     gap: 0.5rem;
     padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: env(safe-area-inset-bottom);
   }
   input {
     flex: 1;
