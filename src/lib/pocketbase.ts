@@ -1,14 +1,13 @@
 import PocketBase from 'pocketbase';
 import { writable } from 'svelte/store';
 
-export const pb = new PocketBase('http://localhost:8090');
+export const pb = new PocketBase('https://chat-app-backend-r1km.onrender.com');
 export const currentUser = writable(pb.authStore.model);
 
-// Sync store with PocketBase
-type AuthModel = typeof pb.authStore.model;
-
+// Sync store and log auth changes
 pb.authStore.onChange(() => {
   currentUser.set(pb.authStore.model);
+  console.log('Auth changed:', pb.authStore.model);
 });
 
 export async function login(email: string, password: string) {
