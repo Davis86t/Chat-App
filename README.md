@@ -1,38 +1,101 @@
-# sv
+# 💬 Chat-App
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A modern, responsive real-time chat application built with **SvelteKit** and **PocketBase**.
 
-## Creating a project
+This project was completed as part of a full-stack coding challenge to demonstrate experience in frontend and backend development, UI/UX polish, and deployment. It is designed to be intuitive, fast, and mobile-friendly.
 
-If you're seeing this, you've probably already done this step. Congrats!
+---
 
-```sh
-# create a new project in the current directory
-npx sv create
+## 🌐 Live Demo
 
-# create a new project in my-app
-npx sv create my-app
-```
+**Frontend:** [https://tannerdavis.dev](https://tannerdavis.dev)  
+**Backend (PocketBase):** [https://chat-app-backend-r1km.onrender.com](https://chat-app-backend-r1km.onrender.com)
 
-## Developing
+→ You can register, log in, and chat in real time with others.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+---
 
-```sh
+## 🛠️ Tech Stack
+
+- **Frontend:** [SvelteKit](https://kit.svelte.dev/)
+- **Backend:** [PocketBase](https://pocketbase.io/) (Self-hosted BaaS)
+- **Deployment:** Vercel (Frontend) + Render (PocketBase API)
+- **Styling:** Responsive mobile-first CSS with modern layout techniques
+- **Auth:** PocketBase users collection with secure login and registration
+
+---
+
+## 🚀 Getting Started Locally
+
+### Clone the project:
+
+```bash
+git clone https://github.com/davis86t/chat-app.git
+cd chat-app
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+> You'll need PocketBase running locally too:
 
-To create a production version of your app:
-
-```sh
-npm run build
+```bash
+./pocketbase serve
 ```
 
-You can preview the production build with `npm run preview`.
+Make sure your frontend is configured to connect to the correct PocketBase instance (update the API URL in `src/lib/pocketbase.ts`).
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+---
+
+## ✨ Features
+
+- ✅ User registration and login  
+- ✅ Real-time messaging with PocketBase subscriptions  
+- ✅ User authentication with token storage  
+- ✅ Auto-scroll to latest messages  
+- ✅ Clean UI and polished UX  
+- ✅ Fully responsive for mobile and desktop  
+- ✅ Logout functionality  
+- ✅ Custom button components with hover and theme-aware styling  
+- ✅ Smooth animations and scroll behavior  
+- ✅ Message timestamps with consistent formatting  
+- ✅ Custom fonts and accessible color contrast  
+
+---
+
+## 🎯 Extra Credit
+
+- 🧠 Username support (not just email)  
+- 🎨 Styled button variants (default, outline, ghost, etc.)  
+- 🖼️ Mobile layout with 100dvh and dynamic keyboard-aware scroll behavior  
+- 🧪 Dev + production environment handling  
+- 🧱 CSS modular structure for maintainability  
+
+---
+
+## 🤔 Development Notes
+
+This app was built using the latest SvelteKit and PocketBase. The chat updates in real time using PocketBase's `subscribe()` feature. Messages are stored with an expanded `sender` reference, allowing us to show the user's `username` instead of a raw ID. Input forms and the layout are carefully crafted to support both desktop and mobile experiences. A custom auto-scroll method was implemented using `bind:this` and `tick()` to wait for DOM rendering.
+
+---
+
+## 🧪 TODO / Stretch Goals
+
+- ✅ Auto-login after registration  
+- ✅ Error and success feedback  
+- [ ] Avatar / profile images  
+- [ ] Emojis or reactions  
+- [ ] Read receipts or typing indicators  
+- [ ] Message editing/deleting  
+
+---
+
+## 📄 License
+
+MIT — free to use, modify, or share.
+
+---
+
+## 🧠 About
+
+This project was created by **Tanner Davis** for a real-world development challenge with Zimmer Marketing.
+
