@@ -62,7 +62,7 @@
 
   function handleLogout() {
     logout();
-    goto('/login');
+    goto('/');
   }
 </script>
 
