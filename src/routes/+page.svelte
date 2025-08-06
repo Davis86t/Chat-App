@@ -12,8 +12,8 @@
 
 <main class="landing">
   <div class="content">
-    <h1>Welcome to Chat-App</h1>
-    <p>This is a simple real-time messaging app built with SvelteKit and PocketBase.</p>
+    <h1 class="page-title">Welcome to Chat-App</h1>
+    <p class="accent-title">This is a simple real-time messaging app built with SvelteKit and PocketBase.</p>
     <div class="buttons">
       <button on:click={goToLogin}>Login</button>
       <button on:click={goToRegister} class="ghost">Register</button>
@@ -50,6 +50,10 @@
   p {
     margin-bottom: 2rem;
     color: #555;
+  }
+
+  .accent-title {
+   font-family: var(--font-body);
   }
 
   .buttons {

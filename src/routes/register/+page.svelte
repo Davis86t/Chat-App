@@ -27,7 +27,7 @@
 
 <div class="auth-container">
   <form on:submit|preventDefault={handleRegister}>
-    <h2>Register</h2>
+    <h2 class="page-title">Register</h2>
     {#if error}<p class="error">{error}</p>{/if}
     <input type="text" bind:value={username} placeholder="Username" required />
     <input type="email" bind:value={email} placeholder="Email" required />

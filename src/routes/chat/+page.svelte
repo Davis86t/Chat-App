@@ -69,7 +69,7 @@
 {#if error}<p class="error">{error}</p>{/if}
 <div class="chat">
   <header>
-    <h2>Chat</h2>
+    <h2 class="page-title">Chat</h2>
   </header>
   <div class="messages" bind:this={messagesContainer}>
     {#each messages as m (m.id)}
@@ -93,10 +93,10 @@
   </div>
   <form on:submit|preventDefault={sendMessage}>
     <input bind:value={newMessage} placeholder="Type a message..." />
-    <button class="btn" type="submit">Send</button>
+    <button type="submit">Send</button>
   </form>
   <footer>
-    <button class="btn" on:click={handleLogout}>Logout</button>
+    <button on:click={handleLogout} class="ghost">Logout</button>
   </footer>
 </div>
 
@@ -131,7 +131,6 @@
     }
   }
 
-
   .chat {
     display: flex;
     flex-direction: column;
@@ -153,6 +152,7 @@
     overflow-y: auto;
     min-height: 0;
   }
+
   .msg {
     display:flex;
     flex-direction: column;
@@ -161,21 +161,25 @@
     margin-bottom: 1rem;
     max-width: 70%;
   }
+
   .msg small { 
     color: #555;
     display: block;
     margin-bottom: 0.2rem; 
   }
+
   .self {
   background-color: #daf1da;
   align-self: flex-end;
   text-align: right;
   }
+
   .other {
   background-color: #f0f0f0;
   align-self: flex-start;
   text-align: left;
   }
+
   .meta {
   font-size: 0.75rem;
   color: #555;
@@ -183,13 +187,16 @@
   display: flex;
   justify-content: space-between;
   }
+
   .timestamp {
   font-style: italic;
   }
+
   header {
     padding: 1rem 0;
     flex: 0 0 auto;
   }
+
   footer {
   padding: 1rem 0;
   justify-content: center;
@@ -206,12 +213,11 @@
     padding-top: 0.5rem;
     padding-bottom: env(safe-area-inset-bottom);
   }
+
   input {
     flex: 1;
     padding: 0.5rem;
   }
-  button {
-    padding: 0.5rem 1rem;
-  }
+
   .error { color: red; text-align: center; }
 </style>

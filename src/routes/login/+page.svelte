@@ -18,7 +18,7 @@
 
 <div class="auth-container">
   <form on:submit|preventDefault={handleLogin}>
-    <h2>Login</h2>
+    <h2 class="page-title">Login</h2>
     {#if error}<p class="error">{error}</p>{/if}
     <input type="email" bind:value={email} placeholder="Email" required />
     <input type="password" bind:value={password} placeholder="Password" required />
