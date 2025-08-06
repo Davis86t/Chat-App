@@ -16,7 +16,7 @@
     <p>This is a simple real-time messaging app built with SvelteKit and PocketBase.</p>
     <div class="buttons">
       <button on:click={goToLogin}>Login</button>
-      <button on:click={goToRegister}>Register</button>
+      <button on:click={goToRegister} class="ghost">Register</button>
     </div>
   </div>
 </main>
@@ -58,29 +58,10 @@
     gap: 1rem;
   }
 
-  button {
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 6px;
-    background-color: #0070f3;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-
-  button:hover {
-    background-color: #005dc1;
-  }
-
   @media (min-width: 600px) {
     .buttons {
       flex-direction: row;
       justify-content: center;
-    }
-
-    button {
-      width: 150px;
     }
   }
 </style>

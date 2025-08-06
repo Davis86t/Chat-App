@@ -93,10 +93,10 @@
   </div>
   <form on:submit|preventDefault={sendMessage}>
     <input bind:value={newMessage} placeholder="Type a message..." />
-    <button type="submit">Send</button>
+    <button class="btn" type="submit">Send</button>
   </form>
   <footer>
-    <button on:click={handleLogout}>Logout</button>
+    <button class="btn" on:click={handleLogout}>Logout</button>
   </footer>
 </div>
 

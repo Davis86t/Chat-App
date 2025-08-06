@@ -32,7 +32,7 @@
     <input type="text" bind:value={username} placeholder="Username" required />
     <input type="email" bind:value={email} placeholder="Email" required />
     <input type="password" bind:value={password} placeholder="Password" required />
-    <button type="submit">Register</button>
+    <button class="btn" type="submit">Register</button>
   </form>
 </div>
 
@@ -63,20 +63,6 @@
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 6px;
-  }
-
-  button {
-    padding: 0.75rem;
-    font-size: 1rem;
-    background-color: #198754;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: #157347;
   }
 
   .error {
