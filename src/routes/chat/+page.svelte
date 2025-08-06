@@ -107,12 +107,15 @@
       padding-inline: 0.5rem;
       height: calc(var(--vh, 1vh) * 100);
       max-height: calc(var(--vh, 1vh) * 100);
+      border-radius: 12px;
+      overflow: hidden; 
     }
 
     .messages {
       padding: 0.5rem;
       flex:1;
       overflow-y: auto;
+      border-radius: 8px;
     }
 
     input,
