@@ -140,6 +140,8 @@
     height: calc(var(--vh, 1vh) * 100);
     max-height: calc(var(--vh, 1vh) * 100);
     box-sizing: border-box;
+    border-radius: 12px;
+    overflow: hidden; 
   }
 
   .messages {
@@ -151,6 +153,7 @@
     background: #fafafa;
     overflow-y: auto;
     min-height: 0;
+    border-radius: 8px;
   }
 
   .msg {
@@ -201,6 +204,9 @@
   padding: 1rem 0;
   justify-content: center;
   display: flex;
+  border-top: 1px solid #eee;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
   }
 
   form {
@@ -217,6 +223,8 @@
   input {
     flex: 1;
     padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
   }
 
   .error { color: red; text-align: center; }
