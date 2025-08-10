@@ -11,28 +11,49 @@
   let error = '';
   let messagesContainer: HTMLDivElement | null = null;
 
-
+  // tiny helpers
+  const shortId = (id?: string) => (id ? `${id.slice(0,4)}…${id.slice(-4)}` : 'Unknown user');
+  export function displayName(user?: any, fallbackId?: string) {
+    if (!user) return shortId(fallbackId);
+    if (user.username) return user.username;
+    if (user.email && (user.emailVisibility === true || user.emailVisibility === 1)) return user.email;
+    return shortId(user.id || fallbackId);
+  }
 
   onMount(async () => {
     try {
+      // 1) initial fetch with expand so UI has sender data immediately
       const res = await pb.collection('messages').getList(1, 50, {
         sort: 'created',
-        expand: 'sender'
+        expand: 'sender',
+        fields: 'id,text,created,sender,expand.sender.id,expand.sender.username,expand.sender.email,expand.sender.emailVisibility'
       });
       messages = res.items;
       scrollToBottom();
-
+      // 2) subscribe to real-time updates
       unsubscribe = await pb.collection('messages').subscribe('*', async ({ action, record }) => {
-        if (action === 'create') {
-          const sender = await pb.collection('users').getOne(record.sender);
-          record.expand = { sender };
-          messages = [...messages, record];
-          await tick(); // Wait for DOM to update
-          scrollToBottom();
+        if (action !== 'create') return;
+
+        let sender = record.expand?.sender;
+        if (!sender) {
+          try {
+            sender = await pb.collection('users').getOne(record.sender, {
+              fields: 'id,username,email,emailVisibility'
+            });
+          } catch {
+            // leave undefined; UI will show fallback
+          }
         }
+        if (sender) {
+          record.expand = { ...(record.expand || {}), sender };
+        }
+
+        messages = [...messages, record];
+        await tick();
+        scrollToBottom();
       });
-    } catch (err) {
-      error = err.message || 'Failed to load messages';
+    } catch (err: any) {
+      error = err?.message || 'Failed to load messages';
       console.error('Subscription error:', err);
     }
   });
@@ -40,17 +61,17 @@
   onDestroy(() => unsubscribe?.());
 
   async function sendMessage() {
-    if (!newMessage) return;
+    if (!newMessage.trim()) return;
     try {
       await pb.collection('messages').create({
         text: newMessage,
         sender: get(currentUser).id
       });
       newMessage = '';
-      await tick(); // Wait for DOM to update
-      scrollToBottom()
-    } catch (err) {
-      error = err.message || 'Failed to send message';
+      await tick();
+      scrollToBottom();
+    } catch (err: any) {
+      error = err?.message || 'Failed to send message';
     }
   }
 
@@ -66,6 +87,7 @@
   }
 </script>
 
+
 {#if error}<p class="error">{error}</p>{/if}
 <div class="chat">
   <header>
@@ -75,15 +97,17 @@
     {#each messages as m (m.id)}
       <div class="msg {m.sender === get(currentUser).id ? 'self' : 'other'}">
         <div class="meta">
-          <small>{m.expand?.sender?.username || m.expand?.sender?.email || m.sender}
-            &middot; 
-            <div class="timestamp">{new Date(m.created).toLocaleString('en-US', {
-              year: '2-digit',
-              month: '2-digit',
-              day: '2-digit',
-              hour: 'numeric',
-              minute: '2-digit'
-            })}
+          <small>
+            {displayName(m.expand?.sender, m.sender) || 'Unknown user'}
+            &middot;
+            <div class="timestamp">
+              {new Date(m.created).toLocaleString('en-US', {
+                year: '2-digit',
+                month: '2-digit',
+                day: '2-digit',
+                hour: 'numeric',
+                minute: '2-digit'
+              })}
             </div>
           </small>
         </div>
